@@ -1,0 +1,57 @@
+﻿@model List<GameShop.Models.CartItem>
+
+<h2>Ваш кошик</h2>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info">
+        Ваш кошик порожній. <a asp-controller="Home" asp-action="Home">Переглянути ігри</a>
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Гра</th>
+                <th>Ціна</th>
+                <th>Сума</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="align-middle">@item.Game.Title</td>
+                    <td class="align-middle">@item.Amount</td>
+                    <td class="align-middle">@item.Game.Price.ToString("c")</td>
+                    <td class="align-middle">
+                        @((item.Amount * item.Game.Price).ToString("c"))
+                    </td>
+                    <td class="align-middle">
+                        <a class="btn btn-danger btn-sm"
+                           asp-controller="Cart"
+                           asp-action="RemoveFromCart"
+                           asp-route-id="@item.Game.GameId">
+                            <i class="bi bi-trash"></i> Видалити
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end"><strong>Разом:</strong></td>
+                <td colspan="2">
+                    <strong>@ViewBag.CartTotal.ToString("c")</strong>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-center">
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Оформити замовлення</a>
+        <a class="btn btn-secondary" asp-controller="Home" asp-action="Home">Продовжити покупки</a>
+    </div>
+}

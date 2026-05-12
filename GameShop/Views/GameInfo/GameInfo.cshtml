@@ -1,0 +1,53 @@
+﻿@model GameShop.Models.Game
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.CoverImageUrl" alt="@Model.Title" class="img-fluid rounded shadow">
+        </div>
+
+        <div class="col-md-8">
+            <h1 class="mb-3">@Model.Title</h1>
+            <p><strong>Розробник:</strong> @Model.Developer</p>
+            <p><strong>Дата випуску:</strong> @Model.ReleaseDate.ToString("dd MMMM yyyy")</p>
+
+            <hr>
+
+            <h4>Опис</h4>
+            <p>@Model.Description</p>
+
+            <h3 class="text-success my-3">
+                @Model.Price.ToString("C2", new System.Globalization.CultureInfo("uk-UA"))
+            </h3>
+
+            <div class="mb-3">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    // Якщо користувач зареєстрований — додаємо в кошик
+                    <a asp-controller="Cart"
+                       asp-action="AddToCart"
+                       asp-route-id="@Model.GameId"
+                       class="btn btn-success btn-lg">
+                        <i class="bi bi-cart-plus"></i> Купити
+                    </a>
+                }
+                else
+                {
+                    // Якщо ГІСТЬ — пропонуємо увійти
+                    <a asp-controller="UserAccount"
+                       asp-action="Login"
+                       class="btn btn-warning btn-lg">
+                        Увійдіть, щоб купити
+                    </a>
+                }
+            </div>
+
+            <a asp-controller="Home" asp-action="Home" class="btn btn-outline-secondary">
+                Повернутись до каталогу
+            </a>
+        </div>
+    </div>
+</div>

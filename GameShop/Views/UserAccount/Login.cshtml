@@ -1,0 +1,33 @@
+﻿@using GameShop.Models
+@model LoginViewModel
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Вхід (Login)</h2>
+
+    <form method="post" asp-action="Login" asp-controller="UserAccount">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Login"></label>
+            <input asp-for="Login" class="form-control" />
+            <span asp-validation-for="Login" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-success">Увійти</button>
+
+            <a href="/PasswordRecovery/EnterEmail" class="forgot-password-link">Забули пароль?</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

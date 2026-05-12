@@ -1,0 +1,46 @@
+﻿@model List<GameShop.Models.Game>
+
+@{
+    ViewData["Title"] = "Моя бібліотека";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4"><i class="bi bi-collection-play-fill"></i> Моя колекція ігор</h2>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-secondary text-center py-5">
+            <h4>У вас поки немає придбаних ігор 😢</h4>
+            <p>Саме час обрати щось цікаве!</p>
+            <a asp-controller="Home" asp-action="Home" class="btn btn-primary mt-2">Перейти в магазин</a>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            @foreach (var game in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="@game.CoverImageUrl" class="card-img-top" alt="@game.Title" style="height: 200px; object-fit: cover;">
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-truncate">@game.Title</h5>
+                            <p class="card-text text-muted small">@game.Developer</p>
+
+                            <div class="mt-auto">
+                                <button class="btn btn-success w-100 mb-2">
+                                    <i class="bi bi-download"></i> Завантажити
+                                </button>
+
+                                <a asp-controller="GameInfo" asp-action="GameInfo" asp-route-id="@game.GameId" class="btn btn-outline-secondary w-100 btn-sm">
+                                    Сторінка гри
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

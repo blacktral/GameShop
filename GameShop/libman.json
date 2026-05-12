@@ -1,0 +1,33 @@
+{
+  "version": "3.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    // 1. БІБЛІОТЕКА: Bootstrap
+    {
+      "library": "bootstrap@5.3.3",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "css/bootstrap.min.css",
+        "js/bootstrap.bundle.min.js"
+      ]
+    },
+    // 2. JQUERY-VALIDATION (ВИПРАВЛЕНО: додано "dist/")
+    {
+      "provider": "unpkg",
+      "library": "jquery-validation@1.19.5",
+      "destination": "wwwroot/lib/jquery-validation/",
+      "files": [
+        "dist/jquery.validate.min.js"
+      ]
+    },
+    // 3. JQUERY-VALIDATION-UNOBTRUSIVE (ВИПРАВЛЕНО: додано "dist/")
+    {
+      "provider": "unpkg",
+      "library": "jquery-validation-unobtrusive@3.2.12",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
+      "files": [
+        "dist/jquery.validate.unobtrusive.min.js" // <-- Це було вашою помилкою!
+      ]
+    }
+  ]
+}

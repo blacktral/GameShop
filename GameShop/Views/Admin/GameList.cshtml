@@ -1,0 +1,49 @@
+﻿@model IEnumerable<GameShop.Models.Game>
+
+@{
+    ViewData["Title"] = "Список ігор";
+}
+
+<h1>Список ігор для редагування</h1>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Назва</th>
+            <th>Розробник</th>
+            <th>Ціна</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in Model)
+        {
+            <tr>
+                <td>@game.GameId</td>
+                <td>@game.Title</td>
+                <td>@game.Developer</td>
+                <td>@game.Price.ToString("C")</td>
+                <td>
+                    <a asp-action="EditGame" asp-route-id="@game.GameId" class="btn btn-primary btn-sm">Редагувати</a>
+
+                    <form asp-action="DeleteGame" asp-route-id="@game.GameId" method="post" style="display:inline; margin-left: 5px;">
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Ви впевнені, що хочете видалити гру \'@game.Title\'?');">
+                            Видалити
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

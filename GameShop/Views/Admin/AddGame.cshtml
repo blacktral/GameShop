@@ -1,0 +1,68 @@
+﻿@model List<GameShop.Services.Rawg.DTOs.RawgGameSummary>
+@{
+    ViewData["Title"] = "Імпорт ігор з RAWG API";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@* Вивід повідомлень (TempData/ViewData) *@
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-info">@ViewData["Message"]</div>
+}
+
+@* Форма пошуку *@
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="SearchRawg" method="post" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="query" class="form-control" placeholder="Введіть назву гри" required />
+                <button type="submit" class="btn btn-primary">Пошук гри</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@* Таблиця результатів *@
+@if (Model != null && Model.Any())
+{
+    <h2>Результати пошуку</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Дата випуску</th>
+                <th>Дія</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Released?.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        <form asp-action="ImportGameDetails" method="post">
+                            <input type="hidden" name="rawgId" value="@item.Id" />
+                            <button type="submit" class="btn btn-success btn-sm">Імпортувати</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (ViewData["Message"] == null)
+{
+    <p>Введіть запит вище, щоб знайти ігри для імпорту.</p>
+}

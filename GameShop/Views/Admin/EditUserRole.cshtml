@@ -1,0 +1,37 @@
+﻿@model GameShop.Models.ViewModels.EditUserRoleViewModel
+
+@{
+    ViewData["Title"] = "Зміна ролі";
+}
+
+<h1>Зміна ролі для @Model.Username</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="EditUserRole" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="Username" />
+
+            <div class="form-group">
+                <label asp-for="SelectedRole" class="control-label">Нова роль для користувача</label>
+
+                <select asp-for="SelectedRole"
+                        asp-items="@Model.RolesList"
+                        class="form-control">
+                    <option value="">-- Не призначати роль --</option>
+                </select>
+
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-success">Зберегти зміни</button>
+                <a asp-action="UserList" class="btn btn-secondary">Скасувати</a>
+            </div>
+        </form>
+    </div>
+</div>
