@@ -86,7 +86,7 @@ namespace GameShop.Controllers
                 _context.OrderItems.Add(orderItem);
 
                 // Б. Додаємо в БІБЛІОТЕКУ користувача (UserLibraries)
-                // Перевіряємо, чи немає вже такої гри, щоб не було дублікатів gfdgdfhgdfgdf
+                // Перевіряємо, чи немає вже такої гри, щоб не було дублікатів gfdgdfhgdfgdf авыавыавыавыайывпывп
                 bool alreadyOwned = _context.UserLibraries.Any(ul => ul.UserId == userId && ul.GameId == item.Game.GameId);
 
                 if (!alreadyOwned)
