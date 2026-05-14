@@ -95,7 +95,6 @@ namespace GameShop.Controllers
                     {
                         UserId = userId,
                         GameId = item.Game.GameId,
-                        // PurchaseDate = DateTime.UtcNow // Якщо є таке поле
                     };
                     _context.UserLibraries.Add(userLib);
                 }
