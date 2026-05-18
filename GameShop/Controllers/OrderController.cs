@@ -100,7 +100,7 @@ namespace GameShop.Controllers
                 }
             }
 
-            // Зберігаємо всі зміни (OrderItems та UserLibraries)gfgf ffffffff папап
+            // Зберігаємо всі зміни (OrderItems та UserLibraries)
             _context.SaveChanges();
 
             // --- ЕТАП 3: Фінал ---
