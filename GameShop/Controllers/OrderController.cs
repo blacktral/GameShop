@@ -104,7 +104,7 @@ namespace GameShop.Controllers
             _context.SaveChanges();
 
             // --- ЕТАП 3: Фінал ---
-            _cartService.ClearCart(); // Очищаємо кошик ffdsfdsf рпрпрпрп
+            _cartService.ClearCart(); // Очищаємо кошик 
 
             return RedirectToAction("CheckoutComplete");
         }
