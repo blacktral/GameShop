@@ -109,7 +109,7 @@ namespace GameShop.Controllers
             return RedirectToAction("CheckoutComplete");
         }
 
-        // 3. Сторінка успіху
+        // 3. Сторінка успіхуh
         public IActionResult CheckoutComplete()
         {
             ViewBag.Message = "Дякуємо за покупку! Ігри додано до вашої бібліотеки.";
